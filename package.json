@@ -6,12 +6,10 @@
 		"type": "git",
 		"url": "git+https://github.com/CRIS4566/wetube-reloaded.git"
 	},
-		"scripts": {
+	"scripts": {
 		"dev:server": "nodemon",
 		"dev:assets": "webpack"
 	},
-
-	
 	"author": "Cris, Seongho Park",
 	"license": "MIT",
 	"bugs": {
