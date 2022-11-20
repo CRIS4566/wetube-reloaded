@@ -1,0 +1,12 @@
+extends base
+
+block content 
+    if errorMessage 
+        span=errorMessage
+    form(method="POST", enctype="multipart/form-data")
+        label(for="video") Video File 
+        input(type = "file",accept="video/*",required, id="video",name="video")
+        input(placeholder = "Title", type="text", name="title", maxLength=80)
+        input(placeholder = "Description", type="text", name="description", maxLength=200)
+        input(placeholder = "Hashtags, seprated by comma.", type="text", name="hashtags")
+        input(type="submit", value="Upload Video")
