@@ -5,10 +5,26 @@ import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import apiRouter from "./routers/apiRouter";
 import { localsMiddleware } from "./middlewares";
 
 const app = express();
 const logger = morgan("dev");
+
+app.use((req, res, next) => {
+	res.header("Cross-Origin-Embedder-Policy", "require-corp");
+	res.header("Cross-Origin-Opener-Policy", "same-origin");
+	next();
+});
+
+//app.use((req, res, next) => {
+//	res.setHeader("Access-Control-Allow-Origin", "*");
+//	res.header(
+//	  "Access-Control-Allow-Headers",
+//	  "Origin, X-Requested-With, Content-Type, Accept"
+//	);
+//	next();
+//  });
 
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
@@ -30,5 +46,6 @@ app.use("/static", express.static("assets"));
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
+app.use("/api", apiRouter);
 
 export default app;
