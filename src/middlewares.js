@@ -12,6 +12,7 @@ export const protectorMiddleware = (req, res, next) => {
 	if (req.session.loggedIn) {
 		next();
 	} else {
+		req.flash("error", "Log In Frist");
 		return res.redirect("/login");
 	}
 };
@@ -20,6 +21,7 @@ export const publicOnlyMiddleware = (req, res, next) => {
 	if (!req.session.loggedIn) {
 		return next();
 	} else {
+		req.flash("error", "Not authorized");
 		return res.redirect("/");
 	}
 };
@@ -30,9 +32,10 @@ export const avatarUpload = multer({
 		fileSize: 3000000,
 	},
 });
+
 export const videoUpload = multer({
 	dest: "uploads/videos/",
 	limits: {
-		fileSize: 10000000,
+		fileSize: 50000000,
 	},
 });
